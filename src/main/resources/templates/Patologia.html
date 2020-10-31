@@ -1,0 +1,141 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patologia </title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js"></script>
+
+		<style type="text/css">
+		body{
+		padding-left:50px;
+		padding-top:10px;
+		padding-right:50px;
+		}
+		
+		i {
+		padding-right:5px;
+		}
+		</style>
+	</head>
+	<body>
+	<div class="container">
+		<div class="col-md-10" id="content-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="clearfix">
+					 <div class="row">
+					 <div class="col-md-6 col-xs-12"><h1 class="pull-left">Patologia</h1></div>
+					 <div class="col-md-6 col-xs-12 text-right">
+					 
+								<a href="/patologia/crear" th:href="@{'/patologia/crear'}" class="btn btn-success">
+								<i class="fas fa-plus"></i> Agregar Patologia</a>
+							
+							
+								<a href="/patologia/actualizar" th:href="@{'/patologia/actualizar'}" class="btn btn-secondary">
+									<i class="fas fa-pencil-alt"></i>Actualizar Patologia</a>
+							
+					 </div>
+						
+					
+							
+							<br><br>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="text-center">
+										
+										<table class="table">
+											<thead class="thead-dark">
+												<tr>
+													<th>Id</th>
+													<th>Tipo de patologia</th>
+													<th>Categoria</th>
+													<th>Patogeno</th>
+													<th>Descripción</th>
+													<th>Sintomas</th>
+													<th>Tratamiento</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody th:each="patologia:${patologia}">
+												<tr>									
+													<td th:text="${patologia.id_pat}"></td>
+													<td th:text="${patologia.tipo_de_patologia}"></td>
+													<td th:text="${patologia.categoria}"></td>
+													<td th:text="${patologia.patogeno}"></td>
+													<td th:text="${patologia.descripcion}"></td>
+													<td th:text="${patologia.sintomas}"></td>
+													<td th:text="${patologia.tratamiento}"></td>
+													<td>
+													<form method="post" action="/patologia/delete/${patologia.id_pat}" th:action="@{'/patologia/delete/' + ${patologia.id_pat}}">
+													<input type="hidden" name="userId" th:value="${patologia.id_pat}"/>
+													<input type="hidden" name="_method" th:value="borrar"/>
+													<button type="submit" name="deletePatologia" class="btn btn-info"><i class="fas fa-trash-alt"></i>Borrar</button>
+													</form>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+															
+									</div>
+								
+								</div>
+							</div>
+	                </div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	</div>		
+		
+
+
+	</body>
+	
+<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                ordering: false,
+                responsive: {
+                    breakpoints: [
+                        { name: 'bigdesktop', width: Infinity },
+                        { name: 'meddesktop', width: 1480 },
+                        { name: 'smalldesktop', width: 1280 },
+                        { name: 'medium', width: 1188 },
+                        { name: 'tabletl', width: 1024 },
+                        { name: 'btwtabllandp', width: 848 },
+                        { name: 'tabletp', width: 768 },
+                        { name: 'mobilel', width: 480 },
+                        { name: 'mobilep', width: 320 }
+                    ]
+                },
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sSearch": "Buscar:",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "sProcessing": "Procesando...",
+                }
+
+            });
+        });
+    </script>
+</html>
