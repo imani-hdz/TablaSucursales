@@ -28,14 +28,14 @@ public class SucursalControlador {
 	{
 		Map<String, Object> modelo=new HashMap<>();
 		modelo=(servicio.listar());
-		vista.addAttribute("sucursal",modelo.get("sucursalList"));
+		vista.addAttribute("sucursales",modelo.get("sucursalList"));
 		return "sucursal";
 	}
 	
 	@GetMapping("/crear")
 	public String redirectcrear(Model model) {
 		model.addAttribute("crearSucursal", new SucursalDTO());
-		return "CrearSucursal";
+		return "crearSucursal";
 	}
 	
 	@PostMapping
@@ -46,8 +46,14 @@ public class SucursalControlador {
 	}
 	
 	@GetMapping("/actualizar")
-	public String actualizar(@ModelAttribute("actSucursal")SucursalDTO sucursal)
-	{
+	public String redirectact(Model model) {
+		model.addAttribute("ActSucursal", new SucursalDTO());
+		return "ActSucursal";		
+	}
+	
+	
+	@PostMapping("/update")
+	public String actualizar(@ModelAttribute ("ActActualizar")SucursalDTO sucursal) {
 		servicio.actualizar(sucursal);
 		return "redirect:/sucursal";
 	}

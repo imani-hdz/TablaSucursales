@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import client.dominio.SucursalDTO;
 import client.util.ResponseDTO;
 
-@FeignClient(url="192.168.1.33:8090", name="sucursal")
+@FeignClient(url="192.168.1.3:8082", name="sucursal")
 public interface ClienteSucursal {
 	
 	@GetMapping(path="/sucursal", produces="application/json")
